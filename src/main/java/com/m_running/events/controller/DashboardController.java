@@ -1,4 +1,4 @@
-package com.m_running.events;
+package com.m_running.events.controller;
 
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
