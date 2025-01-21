@@ -1,0 +1,7 @@
+INSERT INTO events (id, name, description, distance, altitude, itra, price, date, location)
+VALUES
+('Mountain Marathon', 'A challenging marathon in the mountains', 42.195, 1500, 5, 120, '2025-05-15T09:00:00+01:00', 'Zakopane'),
+('Trail Adventure', 'A scenic trail run through forests and hills', 25.0, 800, 3, 70, '2025-06-10T07:30:00+02:00', 'Karpacz'),
+('Ultra Run', 'An ultra-distance run with breathtaking views', 80.0, 2500, 7, 200, '2025-07-20T06:00:00+02:00', 'Bieszczady'),
+('City Sprint', 'A fast-paced race in the city center', 10.0, 50, 1, 30, '2025-03-01T10:00:00+01:00', 'Warszawa'),
+('Desert Challenge', 'A unique race across sandy terrain', 50.0, 200, 4, 150, '2025-09-15T08:00:00+03:00', 'Pustynia Błędowska');
