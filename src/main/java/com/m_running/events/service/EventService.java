@@ -16,4 +16,8 @@ public class EventService {
     public List<Event> getAllEvents() {
         return eventRepo.findAll();
     }
+
+    public Event getEventById(int id) {
+        return eventRepo.findById(id).orElse(new Event(-1));
+    }
 }
