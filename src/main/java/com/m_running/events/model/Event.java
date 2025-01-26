@@ -1,11 +1,9 @@
 package com.m_running.events.model;
 
+import com.fasterxml.jackson.annotation.JsonAnySetter;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonProperty;
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
 
 import java.util.Date;
 
@@ -38,6 +36,15 @@ public class Event {
 
     @JsonProperty
     private String location;
+
+    @JsonProperty
+    private String imageName;
+
+    @JsonProperty
+    private String imageType;
+
+    @Lob
+    private byte[] imageData;
 
     public Event(int id) {
         this.id = id;
@@ -190,5 +197,17 @@ public class Event {
 
     public String toString() {
         return "Event(id=" + this.getId() + ", name=" + this.getName() + ", description=" + this.getDescription() + ", distance=" + this.getDistance() + ", altitude=" + this.getAltitude() + ", itra=" + this.getItra() + ", price=" + this.getPrice() + ", date=" + this.getDate() + ", location=" + this.getLocation() + ")";
+    }
+
+    public void setImageName(String originalFilename) {
+        this.imageName = originalFilename;
+    }
+
+    public void setImageType(String contentType) {
+        this.imageType = contentType;
+    }
+
+    public void setImageData(byte[] bytes) {
+        this.imageData = bytes;
     }
 }
