@@ -1,7 +1,9 @@
 package com.m_running.events.controller;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.m_running.events.model.Event;
 import com.m_running.events.service.EventService;
+import org.antlr.v4.runtime.misc.NotNull;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -18,6 +20,11 @@ public class EventsController {
 
     @Autowired
     private EventService eventService;
+    private final ObjectMapper objectMapper;
+
+    public EventsController(ObjectMapper objectMapper) {
+        this.objectMapper = objectMapper;
+    }
 
     @GetMapping("/events")
     public ResponseEntity<List<Event>> getEvents() {
@@ -36,9 +43,13 @@ public class EventsController {
     }
 
     @PostMapping("/event")
-    public ResponseEntity<?> addEvent(@RequestPart Event event, @RequestPart MultipartFile image) {
+    public ResponseEntity<?> addEvent(
+            @RequestPart("event") String eventJson,
+            @RequestPart("image") @NotNull MultipartFile image
+    ) {
         Event savedEvent = null;
         try {
+            Event event = objectMapper.readValue(eventJson, Event.class);
             savedEvent = eventService.addEvent(event, image);
             return new ResponseEntity<>(savedEvent, HttpStatus.CREATED);
         } catch (IOException e) {
