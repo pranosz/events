@@ -39,8 +39,17 @@ public class EventsController {
         } else {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
-
     }
+
+    @GetMapping("event/{eventId}/image")
+    public ResponseEntity<byte[]> getImageBuEventId(@PathVariable int eventId) {
+        Event event = eventService.getEventById(eventId);
+        if(event.getId() > 0){
+            return  new ResponseEntity<>(event.getImageData(), HttpStatus.OK);
+        } else {
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        }
+    };
 
     @PostMapping("/event")
     public ResponseEntity<?> addEvent(

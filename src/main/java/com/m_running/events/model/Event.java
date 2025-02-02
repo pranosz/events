@@ -210,4 +210,8 @@ public class Event {
     public void setImageData(byte[] bytes) {
         this.imageData = bytes;
     }
+
+    public byte[] getImageData() {
+        return this.imageData;
+    }
 }
