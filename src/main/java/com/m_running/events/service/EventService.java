@@ -23,11 +23,15 @@ public class EventService {
         return eventRepo.findById(id).orElse(new Event(-1));
     }
 
-    public Event addEvent(Event event, MultipartFile image) throws IOException {
+    public Event addOrUpdateEvent(Event event, MultipartFile image) throws IOException {
         event.setImageName(image.getOriginalFilename());
         event.setImageType(image.getContentType());
         event.setImageData(image.getBytes());
 
         return eventRepo.save(event);
+    }
+
+    public void deleteEvent(int id) {
+        eventRepo.deleteById(id);
     }
 }

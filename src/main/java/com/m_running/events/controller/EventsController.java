@@ -59,11 +59,36 @@ public class EventsController {
         Event savedEvent = null;
         try {
             Event event = objectMapper.readValue(eventJson, Event.class);
-            savedEvent = eventService.addEvent(event, image);
+            savedEvent = eventService.addOrUpdateEvent(event, image);
             return new ResponseEntity<>(savedEvent, HttpStatus.CREATED);
         } catch (IOException e) {
             return new ResponseEntity<>(e.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR);
         }
-
     };
+
+    @PutMapping("/event/{id}")
+    public ResponseEntity<String> updateEvent(
+            @PathVariable int id,
+            @RequestPart("event") String eventJson,
+            @RequestPart("image") @NotNull MultipartFile image)
+    {
+        Event updatedEvent = null;
+        try {
+            Event event = objectMapper.readValue(eventJson, Event.class);
+            updatedEvent = eventService.addOrUpdateEvent(event, image);
+            return new ResponseEntity<>("Updated", HttpStatus.OK);
+        } catch (IOException e) {
+            return new ResponseEntity<>(e.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    };
+
+    @DeleteMapping("/event/{id}")
+    public ResponseEntity<String> deleteEvent(@PathVariable int id) {
+        Event event = eventService.getEventById(id);
+        if(event != null){
+            eventService.deleteEvent(id);
+            return new ResponseEntity<>("Deleted", HttpStatus.OK);
+        }
+        return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+    }
 }
