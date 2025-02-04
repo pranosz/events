@@ -34,4 +34,8 @@ public class EventService {
     public void deleteEvent(int id) {
         eventRepo.deleteById(id);
     }
+
+    public List<Event> searchEvent(String keyword) {
+        return eventRepo.searchEvent(keyword);
+    }
 }

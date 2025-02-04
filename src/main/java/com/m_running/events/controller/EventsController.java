@@ -91,4 +91,11 @@ public class EventsController {
         }
         return new ResponseEntity<>(HttpStatus.NOT_FOUND);
     }
+
+    @GetMapping("/events/search")
+    public  ResponseEntity<List<Event>> searchEvents(@RequestParam String keyword) {
+        List<Event> events = eventService.searchEvent(keyword);
+        System.out.println("Searching with " + keyword);
+        return new ResponseEntity<>(events, HttpStatus.OK);
+    }
 }
